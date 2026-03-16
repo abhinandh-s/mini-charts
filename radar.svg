@@ -1,33 +1,33 @@
-<svg width="300" height="300" viewBox="-150 -150 300 300" xmlns="http://www.w3.org/2000/svg">
-  <rect id="chart-bg" x="-150" y="-150" width="100%" height="100%" fill="#11111b" />
+<svg width="600" height="600" viewBox="-300 -300 600 600" xmlns="http://www.w3.org/2000/svg">
+  <rect id="chart-bg" x="-300" y="-300" width="100%" height="100%" fill="#11111b" />
 
 <!-- draw axis -->
-  <line x1="0.00" y1="0.00" x2="0.00" y2="-110.00" style="stroke:#a6adc8;stroke-opacity:0.3;stroke-dasharray:2;" />
-  <line x1="0.00" y1="0.00" x2="95.26" y2="-55.00" style="stroke:#a6adc8;stroke-opacity:0.3;stroke-dasharray:2;" />
-  <line x1="0.00" y1="0.00" x2="95.26" y2="55.00" style="stroke:#a6adc8;stroke-opacity:0.3;stroke-dasharray:2;" />
-  <line x1="0.00" y1="0.00" x2="0.00" y2="110.00" style="stroke:#a6adc8;stroke-opacity:0.3;stroke-dasharray:2;" />
-  <line x1="0.00" y1="0.00" x2="-95.26" y2="55.00" style="stroke:#a6adc8;stroke-opacity:0.3;stroke-dasharray:2;" />
-  <line x1="0.00" y1="0.00" x2="-95.26" y2="-55.00" style="stroke:#a6adc8;stroke-opacity:0.3;stroke-dasharray:2;" />
+  <line x1="0.00" y1="0.00" x2="0.00" y2="-260.00" style="stroke:#a6adc8;stroke-opacity:0.3;stroke-dasharray:2;" />
+  <line x1="0.00" y1="0.00" x2="225.17" y2="-130.00" style="stroke:#a6adc8;stroke-opacity:0.3;stroke-dasharray:2;" />
+  <line x1="0.00" y1="0.00" x2="225.17" y2="130.00" style="stroke:#a6adc8;stroke-opacity:0.3;stroke-dasharray:2;" />
+  <line x1="0.00" y1="0.00" x2="0.00" y2="260.00" style="stroke:#a6adc8;stroke-opacity:0.3;stroke-dasharray:2;" />
+  <line x1="0.00" y1="0.00" x2="-225.17" y2="130.00" style="stroke:#a6adc8;stroke-opacity:0.3;stroke-dasharray:2;" />
+  <line x1="0.00" y1="0.00" x2="-225.17" y2="-130.00" style="stroke:#a6adc8;stroke-opacity:0.3;stroke-dasharray:2;" />
 
 <!-- draw scale -->
-  <polygon points="0.00,-27.50 23.82,-13.75 23.82,13.75 0.00,27.50 -23.82,13.75 -23.82,-13.75" style="fill:none;stroke:#a6adc8;stroke-opacity:0.2;" />
-  <polygon points="0.00,-55.00 47.63,-27.50 47.63,27.50 0.00,55.00 -47.63,27.50 -47.63,-27.50" style="fill:none;stroke:#a6adc8;stroke-opacity:0.2;" />
-  <polygon points="0.00,-82.50 71.45,-41.25 71.45,41.25 0.00,82.50 -71.45,41.25 -71.45,-41.25" style="fill:none;stroke:#a6adc8;stroke-opacity:0.2;" />
-  <polygon points="0.00,-110.00 95.26,-55.00 95.26,55.00 0.00,110.00 -95.26,55.00 -95.26,-55.00" style="fill:none;stroke:#a6adc8;stroke-opacity:0.2;" />
+  <polygon points="0.00,-65.00 56.29,-32.50 56.29,32.50 0.00,65.00 -56.29,32.50 -56.29,-32.50" style="fill:none;stroke:#a6adc8;stroke-opacity:0.2;" />
+  <polygon points="0.00,-130.00 112.58,-65.00 112.58,65.00 0.00,130.00 -112.58,65.00 -112.58,-65.00" style="fill:none;stroke:#a6adc8;stroke-opacity:0.2;" />
+  <polygon points="0.00,-195.00 168.87,-97.50 168.87,97.50 0.00,195.00 -168.87,97.50 -168.87,-97.50" style="fill:none;stroke:#a6adc8;stroke-opacity:0.2;" />
+  <polygon points="0.00,-260.00 225.17,-130.00 225.17,130.00 0.00,260.00 -225.17,130.00 -225.17,-130.00" style="fill:none;stroke:#a6adc8;stroke-opacity:0.2;" />
 
 <!-- draw labels -->
-  <text x="0.00" y="-121.00" style="fill:#cdd6f4;font-size:12px;text-anchor:start;dominant-baseline:middle;font-family:sans-serif;" font-family="sans-serif">Speed</text>
-  <text x="104.79" y="-60.50" style="fill:#cdd6f4;font-size:12px;text-anchor:start;dominant-baseline:hanging;font-family:sans-serif;" font-family="sans-serif">Power</text>
-  <text x="104.79" y="60.50" style="fill:#cdd6f4;font-size:12px;text-anchor:end;dominant-baseline:hanging;font-family:sans-serif;" font-family="sans-serif">Agility</text>
-  <text x="0.00" y="121.00" style="fill:#cdd6f4;font-size:12px;text-anchor:end;dominant-baseline:middle;font-family:sans-serif;" font-family="sans-serif">Stamina</text>
-  <text x="-104.79" y="60.50" style="fill:#cdd6f4;font-size:12px;text-anchor:end;dominant-baseline:alphabetic;font-family:sans-serif;" font-family="sans-serif">Range</text>
-  <text x="-104.79" y="-60.50" style="fill:#cdd6f4;font-size:12px;text-anchor:start;dominant-baseline:alphabetic;font-family:sans-serif;" font-family="sans-serif">Will</text>
+  <text x="0.00" y="-286.00" style="fill:#cdd6f4;font-size:12px;text-anchor:start;dominant-baseline:middle;font-family:sans-serif;" font-family="sans-serif">Speed</text>
+  <text x="247.68" y="-143.00" style="fill:#cdd6f4;font-size:12px;text-anchor:start;dominant-baseline:hanging;font-family:sans-serif;" font-family="sans-serif">Power</text>
+  <text x="247.68" y="143.00" style="fill:#cdd6f4;font-size:12px;text-anchor:end;dominant-baseline:hanging;font-family:sans-serif;" font-family="sans-serif">Agility</text>
+  <text x="0.00" y="286.00" style="fill:#cdd6f4;font-size:12px;text-anchor:end;dominant-baseline:middle;font-family:sans-serif;" font-family="sans-serif">Stamina</text>
+  <text x="-247.68" y="143.00" style="fill:#cdd6f4;font-size:12px;text-anchor:end;dominant-baseline:alphabetic;font-family:sans-serif;" font-family="sans-serif">Range</text>
+  <text x="-247.68" y="-143.00" style="fill:#cdd6f4;font-size:12px;text-anchor:start;dominant-baseline:alphabetic;font-family:sans-serif;" font-family="sans-serif">Will</text>
 
 <!-- draw legends -->
-<rect x="-140" y="-140" width="08" height="08" rx="2" fill="#f38ba8" />  <text x="-125.00" y="-133.30" style="fill:#cdd6f4;font-size:08px;font-family:sans-serif;font-weight:bold;" font-family="sans-serif">Alpha</text>
-<rect x="-140" y="-122" width="08" height="08" rx="2" fill="#89b4fa" />  <text x="-125.00" y="-115.30" style="fill:#cdd6f4;font-size:08px;font-family:sans-serif;font-weight:bold;" font-family="sans-serif">Beta</text>
-<rect x="-140" y="-104" width="08" height="08" rx="2" fill="#a6e3a1" />  <text x="-125.00" y="-97.30" style="fill:#cdd6f4;font-size:08px;font-family:sans-serif;font-weight:bold;" font-family="sans-serif">Theta</text>
-  <polygon points="0.00,-88.00 57.16,-33.00 85.74,49.50 0.00,55.00 -66.68,38.50 -38.11,-22.00" style="fill:#f38ba8;fill-opacity:0.3;stroke:#f38ba8;stroke-width:1;" />
-  <polygon points="0.00,-66.00 66.68,-38.50 47.63,27.50 0.00,88.00 -57.16,33.00 -47.63,-27.50" style="fill:#89b4fa;fill-opacity:0.3;stroke:#89b4fa;stroke-width:1;" />
-  <polygon points="0.00,-11.00 28.58,-16.50 66.68,38.50 0.00,22.00 -85.74,49.50 -76.21,-44.00" style="fill:#a6e3a1;fill-opacity:0.3;stroke:#a6e3a1;stroke-width:1;" />
+<rect x="-290" y="-290" width="16.666666666666668" height="16.666666666666668" rx="2" fill="#f38ba8" />  <text x="-260.00" y="-275.00" style="fill:#cdd6f4;font-size:16.666666666666668px;font-family:sans-serif;font-weight:bold;" font-family="sans-serif">Alpha</text>
+<rect x="-290" y="-260" width="16.666666666666668" height="16.666666666666668" rx="2" fill="#89b4fa" />  <text x="-260.00" y="-245.00" style="fill:#cdd6f4;font-size:16.666666666666668px;font-family:sans-serif;font-weight:bold;" font-family="sans-serif">Beta</text>
+<rect x="-290" y="-230" width="16.666666666666668" height="16.666666666666668" rx="2" fill="#a6e3a1" />  <text x="-260.00" y="-215.00" style="fill:#cdd6f4;font-size:16.666666666666668px;font-family:sans-serif;font-weight:bold;" font-family="sans-serif">Theta</text>
+  <polygon points="0.00,-208.00 135.10,-78.00 202.65,117.00 0.00,130.00 -157.62,91.00 -90.07,-52.00" style="fill:#f38ba8;fill-opacity:0.3;stroke:#f38ba8;stroke-width:1;" />
+  <polygon points="0.00,-156.00 157.62,-91.00 112.58,65.00 0.00,208.00 -135.10,78.00 -112.58,-65.00" style="fill:#89b4fa;fill-opacity:0.3;stroke:#89b4fa;stroke-width:1;" />
+  <polygon points="0.00,-26.00 67.55,-39.00 157.62,91.00 0.00,52.00 -202.65,117.00 -180.13,-104.00" style="fill:#a6e3a1;fill-opacity:0.3;stroke:#a6e3a1;stroke-width:1;" />
 </svg>

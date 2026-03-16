@@ -217,23 +217,25 @@ fn draw_labels(&mut self) {
         let half_size = -self.size / 2.0;
         let x_start = half_size + padding;
         let mut y_start = half_size + padding;
-        let spacing = 18.0;
+        let spacing = self.size / 20.0;
+
+        let font_size = self.size / 36.0;
 
         for series in &self.data {
             // Colored indicator (Square)
             self.svg.push_raw(&format!(
-                r#"<rect x="{}" y="{}" width="08" height="08" rx="2" fill="{}" />"#,
-                x_start, y_start, series.color
+                "<rect x=\"{0}\" y=\"{1}\" width=\"{fs}\" height=\"{fs}\" rx=\"2\" fill=\"{2}\" />",
+                x_start, y_start, series.color, fs = font_size
             ));
 
             // Series Label
             Text {
-                x: x_start + 15.0,
-                y: y_start + 06.7,
+                x: x_start + spacing,
+                y: y_start + (spacing / 2.0),
                 content: series.name.clone(),
                 style: format!(
-                    "fill:{};font-size:08px;font-family:sans-serif;font-weight:bold;",
-                    Mocha::TEXT
+                    "fill:{};font-size:{}px;font-family:sans-serif;font-weight:bold;",
+                    Mocha::TEXT, font_size
                 ),
             }
             .render(&mut self.svg);
@@ -308,7 +310,7 @@ fn main() {
     let portfolio_b = [0.6, 0.7, 0.5, 0.8, 0.6, 0.5];
     let portfolio_c = [0.1, 0.3, 0.7, 0.2, 0.9, 0.8];
 
-    let mut radar = RadarChart::new(300, 40);
+    let mut radar = RadarChart::new(600, 40);
     radar.add_series(Series {
         name: "Alpha".into(),
         values: portfolio_a.to_vec(),
