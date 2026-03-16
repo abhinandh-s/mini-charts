@@ -1,0 +1,9 @@
+[package]
+name = "mini-charts"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+num-traits = "0.2.19"
+color-palette = {  git = "https://github.com/abhinandh-s/color-palette", features = [ "derive" ] }
+
