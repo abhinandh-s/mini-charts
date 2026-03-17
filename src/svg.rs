@@ -75,7 +75,6 @@ pub struct PolygonBuilder {
     pub style: String,
 }
 
-
 impl Polygon {
     // where:
     //  value = 0.0..1.0

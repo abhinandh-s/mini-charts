@@ -1,59 +1,61 @@
-<svg width="600" height="600" viewBox="-300 -300 600 600" xmlns="http://www.w3.org/2000/svg">
-  <rect id="chart-bg" x="-300" y="-300" width="100%" height="100%" fill="#11111b" />
+<svg width="1000" height="1000" viewBox="-500 -500 1000 1000" xmlns="http://www.w3.org/2000/svg">
+  <rect id="chart-bg" x="-500" y="-500" width="100%" height="100%" fill="#11111b" />
 
 <!-- draw axis -->
-  <line x1="0.00" y1="0.00" x2="0.00" y2="-240.00" style="stroke:#a6adc8;stroke-opacity:0.3;stroke-dasharray:2;" />
-  <line x1="0.00" y1="0.00" x2="207.85" y2="-120.00" style="stroke:#a6adc8;stroke-opacity:0.3;stroke-dasharray:2;" />
-  <line x1="0.00" y1="0.00" x2="207.85" y2="120.00" style="stroke:#a6adc8;stroke-opacity:0.3;stroke-dasharray:2;" />
-  <line x1="0.00" y1="0.00" x2="0.00" y2="240.00" style="stroke:#a6adc8;stroke-opacity:0.3;stroke-dasharray:2;" />
-  <line x1="0.00" y1="0.00" x2="-207.85" y2="120.00" style="stroke:#a6adc8;stroke-opacity:0.3;stroke-dasharray:2;" />
-  <line x1="0.00" y1="0.00" x2="-207.85" y2="-120.00" style="stroke:#a6adc8;stroke-opacity:0.3;stroke-dasharray:2;" />
+  <line x1="0.00" y1="0.00" x2="0.00" y2="-400.00" style="stroke:#a6adc8;stroke-opacity:0.3;stroke-dasharray:4;stroke-width:4;" />
+  <line x1="0.00" y1="0.00" x2="346.41" y2="-200.00" style="stroke:#a6adc8;stroke-opacity:0.3;stroke-dasharray:4;stroke-width:4;" />
+  <line x1="0.00" y1="0.00" x2="346.41" y2="200.00" style="stroke:#a6adc8;stroke-opacity:0.3;stroke-dasharray:4;stroke-width:4;" />
+  <line x1="0.00" y1="0.00" x2="0.00" y2="400.00" style="stroke:#a6adc8;stroke-opacity:0.3;stroke-dasharray:4;stroke-width:4;" />
+  <line x1="0.00" y1="0.00" x2="-346.41" y2="200.00" style="stroke:#a6adc8;stroke-opacity:0.3;stroke-dasharray:4;stroke-width:4;" />
+  <line x1="0.00" y1="0.00" x2="-346.41" y2="-200.00" style="stroke:#a6adc8;stroke-opacity:0.3;stroke-dasharray:4;stroke-width:4;" />
 
 <!-- draw scale -->
-  <polygon points="0.00,-60.00 51.96,-30.00 51.96,30.00 0.00,60.00 -51.96,30.00 -51.96,-30.00" style="fill:none;stroke:#a6adc8;stroke-opacity:0.2;" />
-  <polygon points="0.00,-120.00 103.92,-60.00 103.92,60.00 0.00,120.00 -103.92,60.00 -103.92,-60.00" style="fill:none;stroke:#a6adc8;stroke-opacity:0.2;" />
-  <polygon points="0.00,-180.00 155.88,-90.00 155.88,90.00 0.00,180.00 -155.88,90.00 -155.88,-90.00" style="fill:none;stroke:#a6adc8;stroke-opacity:0.2;" />
-  <polygon points="0.00,-240.00 207.85,-120.00 207.85,120.00 0.00,240.00 -207.85,120.00 -207.85,-120.00" style="fill:none;stroke:#a6adc8;stroke-opacity:0.2;" />
+  <polygon points="0.00,-100.00 86.60,-50.00 86.60,50.00 0.00,100.00 -86.60,50.00 -86.60,-50.00" style="fill:none;stroke:#a6adc8;stroke-opacity:0.2;stroke-width:4;" />
+  <polygon points="0.00,-200.00 173.21,-100.00 173.21,100.00 0.00,200.00 -173.21,100.00 -173.21,-100.00" style="fill:none;stroke:#a6adc8;stroke-opacity:0.2;stroke-width:4;" />
+  <polygon points="0.00,-300.00 259.81,-150.00 259.81,150.00 0.00,300.00 -259.81,150.00 -259.81,-150.00" style="fill:none;stroke:#a6adc8;stroke-opacity:0.2;stroke-width:4;" />
+  <polygon points="0.00,-400.00 346.41,-200.00 346.41,200.00 0.00,400.00 -346.41,200.00 -346.41,-200.00" style="fill:none;stroke:#a6adc8;stroke-opacity:0.2;stroke-width:4;" />
 
 <!-- draw labels -->
-  <text x="0.00" y="-247.20" style="fill:#cdd6f4;font-size:14px;text-anchor:middle;dominant-baseline:alphabetic;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,liberation mono,monospace;" font-family="sans-serif">Speed</text>
-  <text x="214.08" y="-123.60" style="fill:#cdd6f4;font-size:14px;text-anchor:start;dominant-baseline:alphabetic;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,liberation mono,monospace;" font-family="sans-serif">Power</text>
-  <text x="214.08" y="123.60" style="fill:#cdd6f4;font-size:14px;text-anchor:start;dominant-baseline:hanging;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,liberation mono,monospace;" font-family="sans-serif">Agility</text>
-  <text x="0.00" y="247.20" style="fill:#cdd6f4;font-size:14px;text-anchor:middle;dominant-baseline:hanging;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,liberation mono,monospace;" font-family="sans-serif">Stamina</text>
-  <text x="-214.08" y="123.60" style="fill:#cdd6f4;font-size:14px;text-anchor:end;dominant-baseline:hanging;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,liberation mono,monospace;" font-family="sans-serif">Range</text>
-  <text x="-214.08" y="-123.60" style="fill:#cdd6f4;font-size:14px;text-anchor:end;dominant-baseline:alphabetic;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,liberation mono,monospace;" font-family="sans-serif">Will</text>
+  <text x="0.00" y="-412.00" style="fill:#cdd6f4;font-size:25.641025641025642px;text-anchor:middle;dominant-baseline:alphabetic;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,liberation mono,monospace;" font-family="sans-serif">Speed</text>
+  <text x="356.80" y="-206.00" style="fill:#cdd6f4;font-size:25.641025641025642px;text-anchor:start;dominant-baseline:alphabetic;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,liberation mono,monospace;" font-family="sans-serif">Power</text>
+  <text x="356.80" y="206.00" style="fill:#cdd6f4;font-size:25.641025641025642px;text-anchor:start;dominant-baseline:hanging;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,liberation mono,monospace;" font-family="sans-serif">Agility</text>
+  <text x="0.00" y="412.00" style="fill:#cdd6f4;font-size:25.641025641025642px;text-anchor:middle;dominant-baseline:hanging;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,liberation mono,monospace;" font-family="sans-serif">Stamina</text>
+  <text x="-356.80" y="206.00" style="fill:#cdd6f4;font-size:25.641025641025642px;text-anchor:end;dominant-baseline:hanging;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,liberation mono,monospace;" font-family="sans-serif">Range</text>
+  <text x="-356.80" y="-206.00" style="fill:#cdd6f4;font-size:25.641025641025642px;text-anchor:end;dominant-baseline:alphabetic;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,liberation mono,monospace;" font-family="sans-serif">Will</text>
 
 <!-- draw legends -->
-<rect x="-290" y="-290" width="16.666666666666668" height="16.666666666666668" rx="2" fill="#f38ba8" />  <text x="-260.00" y="-275.00" style="fill:#cdd6f4;font-size:16.666666666666668px;font-family:sans-serif;font-weight:bold;" font-family="sans-serif">Alpha</text>
-<rect x="-290" y="-260" width="16.666666666666668" height="16.666666666666668" rx="2" fill="#89b4fa" />  <text x="-260.00" y="-245.00" style="fill:#cdd6f4;font-size:16.666666666666668px;font-family:sans-serif;font-weight:bold;" font-family="sans-serif">Beta</text>
-<rect x="-290" y="-230" width="16.666666666666668" height="16.666666666666668" rx="2" fill="#a6e3a1" />  <text x="-260.00" y="-215.00" style="fill:#cdd6f4;font-size:16.666666666666668px;font-family:sans-serif;font-weight:bold;" font-family="sans-serif">Theta</text>
-<polygon points="0.00,-192.00 124.71,-72.00 187.06,108.00 0.00,120.00 -145.49,84.00 -83.14,-48.00" style="fill:#f38ba8;fill-opacity:0.25;stroke:#f38ba8;stroke-width:1;">
+<rect x="-490" y="-490" width="27.77777777777778" height="27.77777777777778" rx="2" fill="#f38ba8" />  <text x="-440.00" y="-465.00" style="fill:#cdd6f4;font-size:27.77777777777778px;font-family:sans-serif;font-weight:bold;" font-family="sans-serif">Alpha</text>
+<rect x="-490" y="-440" width="27.77777777777778" height="27.77777777777778" rx="2" fill="#89b4fa" />  <text x="-440.00" y="-415.00" style="fill:#cdd6f4;font-size:27.77777777777778px;font-family:sans-serif;font-weight:bold;" font-family="sans-serif">Beta</text>
+<rect x="-490" y="-390" width="27.77777777777778" height="27.77777777777778" rx="2" fill="#a6e3a1" />  <text x="-440.00" y="-365.00" style="fill:#cdd6f4;font-size:27.77777777777778px;font-family:sans-serif;font-weight:bold;" font-family="sans-serif">Theta</text>
+
+<!-- plot data -->
+<polygon points="0.00,-320.00 207.85,-120.00 311.77,180.00 0.00,200.00 -242.49,140.00 -138.56,-80.00" style="fill:#f38ba8;fill-opacity:0.25;stroke:#f38ba8;stroke-width:4;">
         <animate 
             attributeName="points" 
             from="0.00,-0.00 0.00,-0.00 0.00,0.00 0.00,0.00 -0.00,0.00 -0.00,-0.00" 
-            to="0.00,-192.00 124.71,-72.00 187.06,108.00 0.00,120.00 -145.49,84.00 -83.14,-48.00" 
+            to="0.00,-320.00 207.85,-120.00 311.77,180.00 0.00,200.00 -242.49,140.00 -138.56,-80.00" 
             dur="1.8s" 
             begin="0s" 
             fill="freeze" 
             calcMode="spline" 
             keyTimes="0;1" 
             keySplines="0.4 0 0.2 1" />
-    </polygon><polygon points="0.00,-144.00 145.49,-84.00 103.92,60.00 0.00,192.00 -124.71,72.00 -103.92,-60.00" style="fill:#89b4fa;fill-opacity:0.25;stroke:#89b4fa;stroke-width:1;">
+    </polygon><polygon points="0.00,-240.00 242.49,-140.00 173.21,100.00 0.00,320.00 -207.85,120.00 -173.21,-100.00" style="fill:#89b4fa;fill-opacity:0.25;stroke:#89b4fa;stroke-width:4;">
         <animate 
             attributeName="points" 
             from="0.00,-0.00 0.00,-0.00 0.00,0.00 0.00,0.00 -0.00,0.00 -0.00,-0.00" 
-            to="0.00,-144.00 145.49,-84.00 103.92,60.00 0.00,192.00 -124.71,72.00 -103.92,-60.00" 
+            to="0.00,-240.00 242.49,-140.00 173.21,100.00 0.00,320.00 -207.85,120.00 -173.21,-100.00" 
             dur="1.8s" 
             begin="0s" 
             fill="freeze" 
             calcMode="spline" 
             keyTimes="0;1" 
             keySplines="0.4 0 0.2 1" />
-    </polygon><polygon points="0.00,-24.00 62.35,-36.00 145.49,84.00 0.00,48.00 -187.06,108.00 -166.28,-96.00" style="fill:#a6e3a1;fill-opacity:0.25;stroke:#a6e3a1;stroke-width:1;">
+    </polygon><polygon points="0.00,-40.00 103.92,-60.00 242.49,140.00 0.00,80.00 -311.77,180.00 -277.13,-160.00" style="fill:#a6e3a1;fill-opacity:0.25;stroke:#a6e3a1;stroke-width:4;">
         <animate 
             attributeName="points" 
             from="0.00,-0.00 0.00,-0.00 0.00,0.00 0.00,0.00 -0.00,0.00 -0.00,-0.00" 
-            to="0.00,-24.00 62.35,-36.00 145.49,84.00 0.00,48.00 -187.06,108.00 -166.28,-96.00" 
+            to="0.00,-40.00 103.92,-60.00 242.49,140.00 0.00,80.00 -311.77,180.00 -277.13,-160.00" 
             dur="1.8s" 
             begin="0s" 
             fill="freeze" 
