@@ -36,18 +36,14 @@ pub struct Circle {
     pub style: String,
 }
 
-impl Circle {
-    pub fn cx(&self) -> (f64, f64) {
-        (self.cx, self.cy)
-    }
-
-    /// Converts a value (0.0 to 1.0) on a specific axis to a Point
-    pub fn point_at(&self, axis_idx: usize, axes_count: usize, scale: f64) -> (f64, f64) {
-        // -PI/2 rotates the chart so the first axis is at the top
-        let angle = (2.0 * PI * axis_idx as f64 / axes_count as f64) - (PI / 2.0);
-        let x = self.cx + self.r * scale * angle.cos();
-        let y = self.cy + self.r * scale * angle.sin();
-        (x, y)
+impl RenderSvg for Circle {
+    fn render(&self, svg: &mut Svg) {
+        writeln!(
+            svg,
+            r#"  <circle cx="{}" cy="{}" r="{}" style="{}" />"#,
+            self.cx, self.cy, self.r, self.style
+        )
+        .unwrap();
     }
 }
 
@@ -73,6 +69,12 @@ pub struct Polygon {
     pub points: String,
     pub style: String,
 }
+
+pub struct PolygonBuilder {
+    pub points: String,
+    pub style: String,
+}
+
 
 impl Polygon {
     // where:
@@ -101,7 +103,6 @@ impl std::fmt::Display for Svg {
     }
 }
 
-use std::f64::consts::PI;
 use std::fmt::Write;
 
 impl std::fmt::Write for Svg {
@@ -115,21 +116,8 @@ pub trait RenderSvg {
     fn render(&self, svg: &mut Svg);
 }
 
-impl RenderSvg for Circle {
-    fn render(&self, svg: &mut Svg) {
-        writeln!(
-            svg,
-            r#"  <circle cx="{}" cy="{}" r="{}" style="{}" />"#,
-            self.cx, self.cy, self.r, self.style
-        )
-        .unwrap();
-    }
-}
-
 impl Svg {
-    pub fn new(h: f64, w: f64) -> Self {
-        let min_w = -w / 2.0;
-        let min_h = -h / 2.0;
+    pub fn new(min_w: f64, min_h: f64, h: f64, w: f64) -> Self {
         Self(format!(
             "<svg width=\"{w}\" height=\"{h}\" viewBox=\"{min_w} {min_h} {w} {h}\" xmlns=\"http://www.w3.org/2000/svg\">\n"
         ))

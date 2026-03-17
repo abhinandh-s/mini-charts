@@ -1,12 +1,75 @@
-#![allow(unused)]
-
 use std::fmt::Display;
 
 use mini_charts::{Line, Mocha, Polygon, RenderSvg as _, Svg, Text};
-use num_traits::{Float, FromPrimitive, ToPrimitive};
 
-/// Custom for svg, not for anything else
-fn polar_to_cartesian(r: f64, deg: f64, scale: f64) -> (f64, f64) {
+/// # Invariance
+/// 
+/// 1. center = (0,0)
+/// 
+/// This do all the maths 
+#[derive(Default)]
+pub struct RadarLayout {
+    // for scaling the chart 
+    // 
+    // width = size 
+    // height = size
+    size: f64,
+    // Invariance: center = (0,0)
+    //
+    // radius is != size / 2, cuz we takes padding,
+    // hence a seperate field
+    radius: f64,
+    // let portfolio_a = &[0.8, 0.6, 0.9, 0.5, 0.7, 0.4];
+    //
+    // series_len = 6 - `(portfolio_a.len()`
+    series_len: usize,
+}
+
+impl RadarLayout {
+    fn get_point(&self, deg: f64, scale: f64) -> Point {
+        Point::from_polar(self.radius, deg, scale)
+    }
+
+    /// Slices the figure into `n` equal parts, and returns the angle between them.
+    ///
+    /// where,
+    ///     n = number of sides of the figure
+    fn deg_in_between(&self) -> f64 {
+        360.0 / self.series_len as f64
+    }
+
+    fn no_of_edges(&self) -> usize {
+        self.series_len
+    }
+
+    // scale_values = 0.0..1.0
+    fn data_to_points(&self, scale_values: &[f64]) -> String {
+        scale_values.iter()
+            .enumerate()
+            .map(|(i, &scale)| {
+                let deg = i as f64 * self.deg_in_between();
+                self.get_point(deg, scale).to_string()
+            })
+        .collect::<Vec<_>>()
+            .join(" ")
+    }
+}
+
+/// this do all the rendering
+pub struct RadarConfig {
+    // scale_n: usize
+}
+
+
+/// Custom for svg.
+///
+/// where, 
+///     center = (0,0)
+///
+/// r, deg => will give point on circle.
+/// if scale == 1.0 => the coordinate is on circle.
+/// scale => helps to move the coordinate to and fro in same direction. 
+pub(crate) fn polar_to_cartesian(r: f64, deg: f64, scale: f64) -> (f64, f64) {
     let rad = (deg - 90.0).to_radians();
     let x = r * rad.cos() * scale;
     let y = r * rad.sin() * scale;
@@ -16,6 +79,13 @@ fn polar_to_cartesian(r: f64, deg: f64, scale: f64) -> (f64, f64) {
 struct Point {
     x: f64,
     y: f64,
+}
+
+impl Point {
+    fn from_polar(r: f64, deg: f64, scale: f64) -> Self {
+        let (x,y) = polar_to_cartesian(r, deg, scale);
+        Point { x, y }
+    }
 }
 
 // Gives `.to_string()` for free
@@ -32,21 +102,21 @@ pub struct Series {
 }
 
 struct RadarChart {
-    size: f64,
-    center: Point,
-    radius: f64,
     data: Vec<Series>,
     svg: Svg,
     theme: RadarTheme,
     axes_labels: Vec<String>,
+    layout: RadarLayout,
 }
 
-struct RadarTheme {
-    bg: Option<&'static str>,
-    label: Option<&'static str>,
-    legend: Option<&'static str>,
-    axis: Option<&'static str>,
-    scale: Option<&'static str>,
+pub struct RadarTheme {
+   pub bg: Option<&'static str>,
+   pub label: Option<&'static str>,
+   pub legend: Option<&'static str>,
+   pub axis: Option<&'static str>,
+   pub scale: Option<&'static str>,
+   pub anim: bool,
+   pub anim_duration: usize
 }
 
 impl Default for RadarTheme {
@@ -57,9 +127,13 @@ impl Default for RadarTheme {
             legend: Some(Mocha::TEXT),
             axis: Some(Mocha::SUBTEXT0),
             scale: Some(Mocha::SUBTEXT0),
+            anim: false,
+            anim_duration: 0,
         }
     }
 }
+
+impl RadarChart {}
 
 impl RadarChart {
     fn new(size: usize, padding: usize) -> Self {
@@ -67,108 +141,58 @@ impl RadarChart {
         let center = s / 2.0;
         let radius = center - padding as f64;
         Self {
-            size: s,
-            center: Point {
-                x: center,
-                y: center,
-            },
-            radius,
             data: vec![],
-            svg: Svg::new(s, s),
+            svg: Svg::new(-s/2.0, -s/2.0, s, s),
             theme: RadarTheme::default(),
             axes_labels: vec![],
+            // TODO: hardcoded series_len
+            layout: RadarLayout { size: s, radius, series_len: 0 }
         }
     }
 
-    fn to_cordinates(&self, deg: f64, scale: f64) -> Point {
-        let (x, y) = polar_to_cartesian(self.radius, deg, scale);
-        Point { x, y }
-    }
-
-    #[deprecated]
-    fn degree_in_between(&self, data: &[f64]) -> f64 {
-        360.0 / data.len() as f64
-    }
-
-    /// Slices the figure into `n` equal parts, and returns the angle between them.
-    ///
-    /// where,
-    ///     n = number of sides of the figure
-    fn deg_in_between<F: Into<f64>>(&self, n: F) -> f64 {
-        360.0 / n.into()
-    }
-
-    #[deprecated]
-    fn no_of_sides(&self) -> usize {
-        self.data.len()
-    }
-
-    // pub fn edge_point(&self, data: usize, total_axes: usize) -> Point {
-    //     let deg = i as f64 * self.degree_in_between(data);
-    //     self.to_cordinates(deg, 1.0)
-    // }
-
-    fn data_to_polygon_points(&self, data: &[f64]) -> String {
-        let n = self.no_of_edges();
-        data.iter()
-            .enumerate()
-            .map(|(i, &val)| {
-                let deg = i as f64 * self.deg_in_between(n as f64);
-                self.to_cordinates(deg, val).to_string()
-            })
-            .collect::<Vec<_>>()
-            .join(" ")
-    }
-
-    fn no_of_edges(&self) -> usize {
-        self.data
-            .first()
-            .map(|s| s.values.len())
-            .unwrap_or_default()
-    }
-
     fn draw_axis(&mut self) {
-        let n = self.no_of_edges();
-        (0..n).for_each(|(i)| {
-            let deg = i as f64 * self.deg_in_between(n as f64);
-            let edge = self.to_cordinates(deg, 1.0);
+        let n = self.layout.no_of_edges();
+        (0..n).for_each(|i| {
+            let deg = i as f64 * self.layout.deg_in_between();
+            let edge = self.layout.get_point(deg, 1.0);
             self.draw_line_from_center(edge);
         });
     }
 
 fn draw_labels(&mut self) {
-    let n = self.no_of_edges();
-    let n_f64 = n as f64;
+    let n = self.layout.no_of_edges();
 
     (0..n).for_each(|i| {
         if let Some(name) = self.axes_labels.get(i) {
-            let deg = i as f64 * self.deg_in_between(n_f64);
+            let deg = i as f64 * self.layout.deg_in_between();
             
-            // 1. Calculate the coordinates slightly outside the chart radius (e.g., 110.0)
-            let edge = self.to_cordinates(deg, 1.1);
+            // 1. Position slightly outside the chart (1.1x radius)
+            let edge = self.layout.get_point(deg, 1.03);
 
-            // 2. Convert degrees to radians for alignment math
-            // SVG 0 degrees is usually the 3 o'clock position
-            let rad = deg.to_radians();
+            // 2. We use the adjusted angle to match polar_to_cartesian logic
+            // Because you offset by -90 in polar_to_cartesian, 
+            // we do the same here to find the visual direction.
+            let rad = (deg - 90.0).to_radians();
             let cos_val = rad.cos();
             let sin_val = rad.sin();
 
             // 3. Horizontal Alignment (text-anchor)
+            // If the point is significantly left or right, align accordingly.
             let anchor = if cos_val.abs() < 0.1 {
-                "middle" // Top or Bottom
+                "middle" 
             } else if cos_val > 0.0 {
-                "start"  // Right side
+                "start"  
             } else {
-                "end"    // Left side
-            } ;
+                "end"    
+            };
 
             // 4. Vertical Alignment (dominant-baseline)
             let baseline = if sin_val.abs() < 0.1 {
-                "middle"      // Left or Right
+                "middle"
             } else if sin_val > 0.0 {
-                "hanging"     // Bottom (text hangs below point)
+                "hanging"    // Bottom: text hangs below point
             } else {
-                "alphabetic"  // Top (text sits above point)
+                "alphabetic" // Top: text sits above point
             };
 
             Text {
@@ -176,7 +200,7 @@ fn draw_labels(&mut self) {
                 y: edge.y,
                 content: name.clone(),
                 style: format!(
-                    "fill:{};font-size:12px;text-anchor:{};dominant-baseline:{};font-family:sans-serif;", 
+                    "fill:{};font-size:14px;text-anchor:{};dominant-baseline:{};font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,liberation mono,monospace;", 
                     Mocha::TEXT, anchor, baseline
                 ),
             }.render(&mut self.svg);
@@ -204,22 +228,18 @@ fn draw_labels(&mut self) {
         .render(&mut self.svg)
     }
 
-    fn set_data(&mut self, data: Vec<Series>) {
-        self.data = data;
-    }
-
     pub fn add_series(&mut self, value: Series) {
         self.data.push(value)
     }
 
     fn draw_legend(&mut self) {
         let padding = 10.0;
-        let half_size = -self.size / 2.0;
+        let half_size = -self.layout.size / 2.0;
         let x_start = half_size + padding;
         let mut y_start = half_size + padding;
-        let spacing = self.size / 20.0;
+        let spacing = self.layout.size / 20.0;
 
-        let font_size = self.size / 36.0;
+        let font_size = self.layout.size / 36.0;
 
         for series in &self.data {
             // Colored indicator (Square)
@@ -245,10 +265,6 @@ fn draw_labels(&mut self) {
     }
 
     fn render(&mut self) -> String {
-        let c = Polygon {
-            points: "10,20 13,2 70,22".into(),
-            style: "fill:red;".into(),
-        };
         self.draw_bg();
         self.draw_svg_comments("draw axis");
         self.draw_axis();
@@ -258,22 +274,49 @@ fn draw_labels(&mut self) {
         self.draw_labels();
         self.draw_svg_comments("draw legends");
         self.draw_legend();
-
-        for series in &self.data {
-            Polygon {
-                points: self.data_to_polygon_points(&series.values),
-                style: format!(
-                    "fill:{};fill-opacity:0.3;stroke:{};stroke-width:1;",
-                    series.color, series.color
-                ),
-            }.render(&mut self.svg);
-        }
-
+        self.plot_data();
         self.svg.finish()
     }
 
+
+fn plot_data(&mut self) {
+    for  series in &self.data {
+        if let Some(first) = self.data.first() {
+            assert_eq!(series.values.len(), first.values.len() )
+
+        }
+
+
+        let n = self.layout.no_of_edges();
+
+        let initial_points = self.layout.data_to_points(&vec![0.0; n]);
+          // let initial_points = self.polygon_points(&vec![0.0; n]); // Points at center
+            // let target_points = self.polygon_points(&series.values);
+            let target_points = self.layout.data_to_points(&series.values);
+
+                    self.svg.push_raw(&format!(
+    r###"<polygon points="{target_points}" style="fill:{color};fill-opacity:0.25;stroke:{color};stroke-width:1;">
+        <animate 
+            attributeName="points" 
+            from="{initial_points}" 
+            to="{target_points}" 
+            dur="1.8s" 
+            begin="0s" 
+            fill="freeze" 
+            calcMode="spline" 
+            keyTimes="0;1" 
+            keySplines="0.4 0 0.2 1" />
+    </polygon>"###,
+    target_points = target_points,
+    initial_points = initial_points,
+    color = series.color
+));
+    }
+
+}
+
     fn draw_bg(&mut self) {
-        let half_size = self.size / 2.0;
+        let half_size = self.layout.size / 2.0;
     let min_x = -half_size;
     let min_y = -half_size;
 
@@ -284,13 +327,13 @@ fn draw_labels(&mut self) {
     }
 
     fn draw_scale(&mut self, n: usize) {
-        let n_edges = self.no_of_edges();
+        let n_edges = self.layout.no_of_edges();
         // 2. Grid Polygons (Concentric Webs)
         for level in 1..=n {
             let scale = level as f64 / n as f64;
             let scale_vec = vec![scale; n_edges];
             Polygon {
-                points: self.data_to_polygon_points(&scale_vec),
+                points: self.layout.data_to_points(&scale_vec),
                 style: format!(
                     "fill:none;stroke:{};stroke-opacity:0.2;",
                     self.theme.scale.unwrap_or_default()
@@ -301,6 +344,7 @@ fn draw_labels(&mut self) {
     }
 
     fn set_axes_labels(&mut self, axes_labels: Vec<String>) {
+        self.layout.series_len = axes_labels.len();
         self.axes_labels = axes_labels;
     }
 }
@@ -310,7 +354,7 @@ fn main() {
     let portfolio_b = [0.6, 0.7, 0.5, 0.8, 0.6, 0.5];
     let portfolio_c = [0.1, 0.3, 0.7, 0.2, 0.9, 0.8];
 
-    let mut radar = RadarChart::new(600, 40);
+    let mut radar = RadarChart::new(600, 60);
     radar.add_series(Series {
         name: "Alpha".into(),
         values: portfolio_a.to_vec(),
