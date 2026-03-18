@@ -29,19 +29,33 @@ impl RenderSvg for Line {
     }
 }
 
-pub struct Circle {
+pub struct Circle<'a> {
+    pub r: f64,
     pub cx: f64,
     pub cy: f64,
-    pub r: f64,
-    pub style: String,
+    pub attrs: HashMap<&'a str, &'a str>,
 }
 
-impl RenderSvg for Circle {
+// common, later to be used as blanket impl or via impl macro
+impl<'a> Circle<'a> {
+    pub fn attr(mut self, key: &'a str, val: &'a str) -> Self {
+        self.attrs.insert(key, val);
+        self
+    }
+}
+
+impl RenderSvg for Circle<'_> {
     fn render(&self, svg: &mut Svg) {
+        let attrs = self
+            .attrs
+            .iter()
+            .map(|(key, value)| format!("{}:{};", key, value))
+            .collect::<Vec<_>>()
+            .join("");
         writeln!(
             svg,
             r#"  <circle cx="{}" cy="{}" r="{}" style="{}" />"#,
-            self.cx, self.cy, self.r, self.style
+            self.cx, self.cy, self.r, attrs
         )
         .unwrap();
     }
@@ -102,6 +116,7 @@ impl std::fmt::Display for Svg {
     }
 }
 
+use std::collections::HashMap;
 use std::fmt::Write;
 
 impl std::fmt::Write for Svg {

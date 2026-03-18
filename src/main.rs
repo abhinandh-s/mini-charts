@@ -1,5 +1,5 @@
 use mini_charts::charts::radar::RadarChart;
-use mini_charts::{Mocha, Series};
+use mini_charts::{Mocha, Series, charts};
 use mini_svg_macro::svg;
 
 fn main() {
@@ -41,7 +41,6 @@ fn main() {
 
     let s = "that".to_string();
 
-
     let svg = svg! {
         width: 100,
         hight: 100,
@@ -58,4 +57,7 @@ fn main() {
     };
 
     println!("{svg}");
+    let line_graph = charts::line::line_chart();
+    std::fs::write("line.svg", line_graph).expect("Unable to write file");
+    
 }
